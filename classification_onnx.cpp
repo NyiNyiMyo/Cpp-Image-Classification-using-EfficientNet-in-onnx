@@ -24,7 +24,7 @@ int main() {
 
         // Collect images
         std::vector<std::string> all_images;
-        for (const auto& entry : fs::directory_iterator("C:/Users/User/source/repos/classification_onnx/flowers/tulip")) {
+        for (const auto& entry : fs::directory_iterator("flowers-tests")) {
             if (entry.is_regular_file()) all_images.push_back(entry.path().string());
         }
         if (all_images.empty()) { std::cerr << "No images found\n"; return -1; }
@@ -102,10 +102,10 @@ int main() {
             cv::Mat thumb;
             cv::resize(orig_img, thumb, cv::Size(display_w, display_h));
 
-            // Overlay label (green)
+            // Overlay label (cyan)
             std::string label_text = class_names[top] + " : " + std::to_string(max_prob).substr(0, 5);
             cv::putText(thumb, label_text, cv::Point(5, 20),
-                cv::FONT_HERSHEY_SIMPLEX, 0.5, cv::Scalar(0, 255, 0), 1);
+                cv::FONT_HERSHEY_SIMPLEX, 0.5, cv::Scalar(255, 255, 0), 1);
 
             // Grid placement
             int r = idx / grid_cols;
